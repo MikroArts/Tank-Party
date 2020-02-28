@@ -7,7 +7,7 @@ public class CameraMovement : MonoBehaviour
 {
 
     public List<Transform> players;
-    private Camera camera;
+    private Camera cam;
     public Vector3 offset;
     private Vector3 velocity;
 
@@ -20,7 +20,7 @@ public class CameraMovement : MonoBehaviour
 
     void Start()
     {
-        camera = GetComponent<Camera>();
+        cam = GetComponent<Camera>();
     }
     void LateUpdate()
     {
@@ -34,7 +34,7 @@ public class CameraMovement : MonoBehaviour
     {
         float newZoom = Mathf.Lerp(maxZoom, minZoom, greatestDistance / zoomLimiter);
         
-        camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, newZoom, Time.deltaTime);
+        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, newZoom, Time.deltaTime);
     }
 
     private void Move()
