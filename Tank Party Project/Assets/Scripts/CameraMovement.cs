@@ -5,60 +5,9 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-
-    public List<Transform> players;
-    private Camera cam;
-    public Vector3 offset;
-    private Vector3 velocity;
-
-    public float smoothTime = .5f;
-    public float minZoom = 27f;
-    public float maxZoom = 10f;
-    public float zoomLimiter = 50f;
-
-    float greatestDistance;
-
-    void Start()
-    {
-        cam = GetComponent<Camera>();
-    }
     void LateUpdate()
     {
-        if (players.Count == 0)
-            return;
-        Move();
-        Zoom();
-    }
-
-    private void Zoom()
-    {
-        float newZoom = Mathf.Lerp(maxZoom, minZoom, greatestDistance / zoomLimiter);
-        
-        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, newZoom, Time.deltaTime);
-    }
-
-    private void Move()
-    {
-        Vector3 middlePoint = CalculateMiddlePoint();
-
-        Vector3 newPosition = middlePoint + offset;
-
-        transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, smoothTime);
-    }
-
-    private Vector3 CalculateMiddlePoint()
-    {
-        if (players.Count == 1)
-        {
-            return players[0].position;
-        }
-
-        var bounds = new Bounds(players[0].position, Vector3.zero);
-        for (int i = 0; i < players.Count; i++)
-        {
-            bounds.Encapsulate(players[i].position);
-        }
-        greatestDistance = bounds.size.z;
-        return bounds.center;
+        transform.localRotation = Quaternion.Euler(new Vector3(45, 0, 0));
+        transform.localPosition = new Vector3(0, 150, -100);        
     }
 }

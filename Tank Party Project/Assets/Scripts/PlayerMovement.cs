@@ -21,9 +21,9 @@ public class PlayerMovement : MonoBehaviour
         transform.Translate(move * moveSpeed * Time.deltaTime, Space.World);
         if (move != Vector3.zero)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(move.normalized), turnSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(move.normalized), turnSpeed * Time.deltaTime);
         }
-        
+
     }
         
 }
