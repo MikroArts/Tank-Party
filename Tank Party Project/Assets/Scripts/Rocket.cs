@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,17 +11,19 @@ public class Rocket : MonoBehaviour
     void OnEnable()
     {
         rocket = GetComponent<Rigidbody>();
+        print("Rocket Start()");
     }
 
     void Update()
-    {        
+    {
+        print("Rocket Update()");
         //transform.rotation = Quaternion.LookRotation(rocket.velocity);
         //RotateRocketAlongTrajectory();  
     }
 
     void OnTriggerEnter(Collider col)
     {
-        Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 
     void RotateRocketAlongTrajectory()

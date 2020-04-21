@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RocketSpawner : MonoBehaviour
 {
+    PhotonView PV;
     public Rigidbody rocket;
 
     public float fireRate = 0f;
@@ -14,12 +16,18 @@ public class RocketSpawner : MonoBehaviour
 
     private Vector3 target;
 
-
-    void Update()
+    void Start()
     {
-        fireRate -= Time.deltaTime;
-        SetMousePositionAsTarget();
-        Shoot();
+        PV = GetComponent<PhotonView>();
+    }
+    void FixedUpdate()
+    {
+        if (PV.IsMine)
+        {
+            fireRate -= Time.deltaTime;
+            SetMousePositionAsTarget();
+            Shoot();
+        }
     }
 
     private void Shoot()
